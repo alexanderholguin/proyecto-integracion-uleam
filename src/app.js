@@ -3,11 +3,8 @@ const path = require('path');
 const app = express();
 
 app.use(express.json());
-
-// Servir los archivos estáticos de la interfaz gráfica
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Ruta API de respaldo para control de estado
 app.get('/api/status', (req, res) => {
     res.status(200).json({ status: "success", backend: "operativo" });
 });
