@@ -1,0 +1,51 @@
+name: Pipeline CI-CD ULEAM
+
+# El pipeline se dispara de forma automatica cada vez que se hace push a la rama main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  # ETAPA 1: COMPILACIÓN (BUILD)
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar codigo fuente del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar entorno de ejecucion Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Instalar dependencias del proyecto
+        run: npm install
+
+  # ETAPA 2: PRUEBAS AUTOMATIZADAS (TEST)
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar codigo fuente del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar entorno de ejecucion Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias de desarrollo
+        run: npm install
+
+      - name: Ejecutar Suite de Control de Calidad
+        run: npm test
+
+  # ETAPA 3: DESPLIEGUE AUTOMÁTICO (DEPLOY)
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notificar y disparar actualizacion del servidor en Render
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
