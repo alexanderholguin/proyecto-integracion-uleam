@@ -36,7 +36,7 @@ jobs:
         run: npm install
 
       - name: Ejecutar la suite de pruebas automatizadas
-        run: node_modules/.bin/jest --passWithNoTests || npx jest
+        run: node ./node_modules/jest/bin/jest.js
 
   deploy:
     needs: test
