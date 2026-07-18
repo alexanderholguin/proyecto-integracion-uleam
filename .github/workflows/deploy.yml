@@ -36,7 +36,7 @@ jobs:
         run: npm install
 
       - name: Ejecutar la suite de pruebas automatizadas
-        run: npm test
+        run: npx jest
 
   deploy:
     needs: test
