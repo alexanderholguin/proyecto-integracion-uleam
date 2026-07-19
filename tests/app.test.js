@@ -7,4 +7,12 @@ describe('Validaci?n de Despliegue de la App Web', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.text).toContain('<!DOCTYPE html>');
     });
+
+    it('Debe mostrar los cuatro integrantes en el index', async () => {
+        const res = await request(app).get('/');
+        expect(res.text).toContain('Alexander');
+        expect(res.text).toContain('Fernando Piguave');
+        expect(res.text).toContain('Integrante 3');
+        expect(res.text).toContain('Integrante 4');
+    });
 });
