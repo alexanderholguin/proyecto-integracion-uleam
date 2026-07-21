@@ -13,6 +13,6 @@ describe('Validaci?n de Despliegue de la App Web', () => {
         expect(res.text).toContain('Alexander');
         expect(res.text).toContain('Fernando Piguave');
         expect(res.text).toContain('Darly Barreto');
-        expect(res.text).toContain('Joel cedeño');
+        expect(res.text).toContain('Joel Cedeño');
     });
 });
