@@ -10,7 +10,7 @@ describe('Validaci?n de Despliegue de la App Web', () => {
 
     it('Debe mostrar los cuatro integrantes en el index', async () => {
         const res = await request(app).get('/');
-        expect(res.text).toContain('Alexander');
+        expect(res.text).toContain('Alexander o');
         expect(res.text).toContain('Fernando Piguave');
         expect(res.text).toContain('Darly Barreto');
         expect(res.text).toContain('Joel Cedeño');
